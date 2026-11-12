@@ -1,0 +1,30 @@
+
+name: Smart Earning Bot
+
+on:
+  schedule:
+    - cron: "30 12 * * *"
+  workflow_dispatch:
+
+jobs:
+  run-bot:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Get project files
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Run Python Bot
+        run: python main.py
+
+      - name: Save Daily Report
+        uses: actions/upload-artifact@v4
+        with:
+          name: daily-earning-report
+          path: reports/
+          retention-days: 30
