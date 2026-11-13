@@ -19,12 +19,15 @@ jobs:
         with:
           python-version: "3.11"
 
-      - name: Run Python Bot
+      - name: Run earning report
         run: python main.py
 
-      - name: Save Daily Report
+      - name: Find online opportunities
+        run: python finder.py
+
+      - name: Save Daily Reports
         uses: actions/upload-artifact@v4
         with:
-          name: daily-earning-report
+          name: daily-earning-reports
           path: reports/
           retention-days: 30
